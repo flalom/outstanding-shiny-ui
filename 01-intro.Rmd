@@ -1,21 +1,24 @@
-# Introduction {#intro}
+# Advance Design{#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+In this chapter, you will learn how to build your own html templates taken from the web 
+and package them, so that they can be re-used at any time by anybody.
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+## Selecting a good template
+There exists tons of HTML templates over the web. However, only a few part will be suitable
+for shiny, mainly because of what follows:
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
+* shiny is built on top of [bootstrap 3](https://getbootstrap.com/docs/3.3/) (HTML, CSS and Javascript framework), meaning that going for another framework might
+not be straightforward. However, shinymaterial and shiny.semantic are examples showing
+this can be possible.
+* shiny relies on [jQuery](https://jquery.com) (currently v 1.12.4 for shiny, whereas the latest version is 3.3.1). Consequently, all templates based upon React, Vue and other Javascript framework will not be natively supported. Again, there exist some [examples](https://github.com/alandipert/react-widget-demo/blob/master/app.R) for React with shiny and more generally,
+the [reactR](https://react-r.github.io/reactR/) package developed by Kent Russell (@timelyportfolio on Twitter) and Alan Dipert from RStudio.
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+See [the github repository](https://github.com/rstudio/shiny/tree/master/inst/www/shared) for more details about all dependencies related to the shiny package.
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
+Therefore in the following, we will restict ourself to Bootstrap (3 and 4) together with jQuery. Don't be disapointed since there is still a lot to say.
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+> Notes: As shiny depends on Bootstrap 3.3.7, we recommand the user who would like to
+experiment Boostrap 4 features to be particularly careful about potential incompatibilies.
+See a working example here with [bs4Dash](https://github.com/RinteRface/bs4Dash).
+
+A good source of **open source** HTML templates is [Colorlib](https://colorlib.com) and [Creative Tim](https://www.creative-tim.com/bootstrap-themes/free). You might also buy your template, but forget about the packaging option, which would be illegal in this particular case, unless you have a legal agreement with the author (very unlikely however).

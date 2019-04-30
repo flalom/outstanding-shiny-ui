@@ -1,0 +1,10 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Template Skeleton
+Now that you have the basis about tags and dependencies, we can go through the template organisation...
+
+TO DO

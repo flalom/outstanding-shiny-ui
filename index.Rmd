@@ -5,8 +5,7 @@ date: "`r Sys.Date()`"
 output:
   html_document:
     df_print: paged
-description: This is a minimal example of using the bookdown package to write a book.
-  The output format for this example is bookdown::gitbook.
+description: This books covers how to develop custom html templates in shiny.
 documentclass: book
 link-citations: yes
 bibliography:
@@ -16,6 +15,14 @@ site: bookdown::bookdown_site
 biblio-style: apalike
 ---
 
-# Prerequisites
+# Pre-requisite {-}
 
-This book requires to be already familiar with R and Shiny. If not, we strongly recommand to read ...
+This book is intended for people already familiar with shiny. Some knowledges about HTML, CSS and Javascript are also appreciated but not mandatory.
+
+Since several years, significant efforts have been made to make shiny production ready. Today there exists tools to bridge the gap between "artisanal" and "professionnal apps". Golem is a package that helps during this transition from local to production. Additionally, there exists prod-ready solutions to host these apps such as RStudio Connect, shiny server pro, shinyproxy, ... However, most of shiny app in the wild still have the same design, in spite of shinydashboard and shinythemes development. There are alternatives such as shinymaterial and shiny semantic, but if we consider the number of existing HTML templates, very few are made available for shiny.
+
+End of november 2018, the RinteRface project was officially released ... TO DO
+
+## About the author {-}
+
+David Granjon ... TO DO
