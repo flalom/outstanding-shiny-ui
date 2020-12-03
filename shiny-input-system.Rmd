@@ -1,19 +1,66 @@
 # Shiny's input system {#shiny-input-system}
 Shiny inputs are key elements of Shiny apps since they are a way for the end-user to interact with the app. You may know `sliderInput`, `numericInput`, `checkboxInput` but sometimes you may need fancier elements like `knobInput` from [shinyWidgets](https://github.com/dreamRs/shinyWidgets/blob/master/R/input-knob.R), as depicted on Figure \@ref(fig:fancy-inputs) or even more sophisticated inputs like the `smartSelect` of [shinyMobile](https://github.com/RinteRface/shinyMobile/blob/master/R/f7-inputs.R) (Figure \@ref(fig:fancy-inputs), right panel). Have you ever wondered what are the mechanisms behind inputs? Have you ever dreamt to develop your own?
 
-The goal of this section is to understand how Shiny inputs work and how to create new ones.
+The goal of this section is to understand how Shiny inputs work.
 
 ```{r fancy-inputs, echo=FALSE, fig.show = "hold", out.width = "50%", fig.align = "default", fig.cap='Custom shiny inputs. left: knobInput from shinyWidgets; right: smart select from shinyMobile'}
 knitr::include_graphics("images/survival-kit/jquery-knobs.png")
 knitr::include_graphics("images/survival-kit/smart-select.png")
 ```
 
-## Input bindings
+## Shiny JavaScript sources
+The Shiny input system relies on the Shiny JavaScript sources. They are located in the srcjs folder shown in Figure \@ref(fig:shiny-js-sources).
 
-When we run our app, most of the time it works just fine! The question is, how are the inputs (and outputs) handled to allow this to happen? Upon initialization, Shiny runs several JavaScript functions. Some are accessible to the programmer (see a usecase [here](https://stackoverflow.com/questions/51633326/dateinput-not-working-on-dt-in-shiny)). To illustrate what they do, let's run the app below.
+```{r shiny-js-sources, echo=FALSE, fig.cap='Shiny JavaScript sources'}
+knitr::include_graphics("images/survival-kit/shiny-js-sources.png")
+```
+
+
+Notice the `_start.js` and `_end.js`. These will be used by the `Gruntfile.js`, that is a [grunt-based](https://gruntjs.com) tool to run different tasks such as concatenate multiple JavaScript files, lint the code, minify it ... See [here](https://github.com/rstudio/shiny/tree/master/tools) for a summary.
+
+```javascript
+grunt.registerTask('default', [
+  'concat',
+  'string-replace',
+  'validateStringReplace',
+  'eslint',
+  'configureBabel',
+  'babel',
+  'uglify'
+]);
+```
+
+These results in a large big [file](https://github.com/rstudio/shiny/blob/master/inst/www/shared/shiny.js) and its minified [version](https://github.com/rstudio/shiny/blob/master/inst/www/shared/shiny.min.js) in the `shiny/inst/www/shared` folder.
+
+
+## The Shiny JavaScript object
+The `Shiny` object is exported at the top of the `shiny.js` file [^export-js]. In other words, this means that we may use this object and any of its properties within the HTML inspector console tab, in any JavaScript file or shiny app as below.
 
 ```{r, eval=FALSE}
-library(shiny)
+ui <- fluidPage(
+  tags$script(
+    "$(function() {
+      console.log(Shiny);
+    });
+    "
+  )
+)
+server <- function(input, output, session) {}
+shinyApp(ui, server)
+```
+
+This object contains many properties and methods as shown in Figure \@ref(fig:shiny-object). Some of particular interest, such as like `Shiny.setInputValue`, `Shiny.addCustomMessageHandler`, `Shiny.shinyapps`, `Shiny.bindAll`, ... will be detailed later
+
+```{r shiny-object, echo=FALSE, fig.cap='The Shiny JavaScript object'}
+knitr::include_graphics("images/survival-kit/shiny-object.png")
+```
+
+[^export-js]: Refer to Chapter \@ref(survival-kit-javascript) if you don't remember how to export an object and make it available to all JS files.
+
+## Initialization
+When we run our app, most of the time it works just fine! The question is, how are the inputs and outputs handeled correctly to allow this to happen? Upon initialization, Shiny runs several JavaScript functions. Not surprisingly, there is one called [`init_shiny`](https://github.com/rstudio/shiny/blob/master/srcjs/init_shiny.js) containing a subtantial number of elements such as `bindInputs` and `unbindInputs` to bind/unbind inputs. Besides, they are accessible to the programmer (see a usecase [here](https://stackoverflow.com/questions/51633326/dateinput-not-working-on-dt-in-shiny)). To illustrate what they do, let's run the app below.
+
+```{r, eval=FALSE}
 ui <- fluidPage(
   sliderInput("obs", "Number of observations:",
               min = 0, max = 1000, value = 500
@@ -29,32 +76,11 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-We then open the HTML inspector and run `Shiny.unbindAll(document)` (document is the scope, that is where to search). Try to change the slider input. You will notice that nothing happens. Now let's type `Shiny.bindAll(document)` and update the slider value. Moving the slider successfully update the plot. Magic isn't it? This simply shows that when inputs are not bound, nothing happens so binding inputs is necessary. 
-
-We consider another example with multiple inputs.
-
-```{r, eval=FALSE}
-ui <- fluidPage(
-  actionButton("unbind", "Unbind inputs", onclick = "Shiny.unbindAll();"),
-  actionButton("bind", "Bind inputs", onclick = "Shiny.bindAll();"),
-  lapply(1:3, function(i) {
-    textInput(paste0("text_", i), paste("Text", i))
-  }),
-  lapply(1:3, function(i) {
-    uiOutput(paste0("val_", i))
-  })
-)
-
-server <- function(input, output, session) {
-  lapply(1:3, function(i) {
-    output[[paste0("val_", i)]] <- renderPrint(input[[paste0("text_", i)]])
-  })
-}
-
-shinyApp(ui, server)
-```
+We then open the HTML inspector and run `Shiny.unbindAll(document)` (document is the scope, that is where to search). Try to change the slider input. You will notice that nothing happens. Now let's type `Shiny.bindAll(document)` and update the slider value. Moving the slider successfuly update the plot. Magic isn't it? This simply shows that when inputs are not bound, nothing happens so binding inputs is necessary. 
 
 Let's see below what is an input binding and how it works.
+
+## Input bindings
 
 ### Input structure
 An input element is given by the `<input>` tag as well as several attributes.
@@ -63,7 +89,7 @@ An input element is given by the `<input>` tag as well as several attributes.
 <input id = inputId type = "text" class = "input-text" value = value>
 ```
 
-  - id guarantees the input uniqueness. We will see very soon that all instances of the same input share a unique input binding, therefore id is mandatory.
+  - id garantees the input uniquess. We will see very soon that all instances of the same input share a unique input binding, therefore id is mandatory.
   - [type](https://www.w3schools.com/tags/att_input_type.asp) 
   - class is targeted by CSS and JavaScript
   - value holds the input value
@@ -85,7 +111,7 @@ find: function(scope) {
 
 Figure \@ref(fig:shiny-find-inputs) summarizes this important step.
 
-```{r shiny-find-inputs, echo=FALSE, fig.cap='How to find inputs?', out.width='100%'}
+```{r shiny-find-inputs, echo=FALSE, fig.cap='How to find inputs?'}
 knitr::include_graphics("images/survival-kit/shiny-find-inputs.png")
 ```
 
@@ -141,7 +167,7 @@ In the [shinyMobile](https://github.com/RinteRface/shinyMobile/tree/master/inst/
 
 Figure \@ref(fig:text-input) shows the main elements of the `textInput` widget. In the above code, `shinyInputLabel` is a Shiny internal function that creates the numeric input label, or in other word the text displayed next to it. The core input element is wrapped by `tags$input`. No worry if the structure seems unclear, we will give more details about shiny tags in the Chapter \@ref(htmltools-overview).
 
-```{r text-input, echo=FALSE, fig.cap='Shiny\'s textInput elements', out.width='100%'}
+```{r text-input, echo=FALSE, fig.cap='Shiny\'s textInput elements'}
 knitr::include_graphics("images/survival-kit/text-input.png")
 ```
 
@@ -154,7 +180,7 @@ customTextInputExample(1)
 
 Results are shown on Figure \@ref(fig:shiny-find-inputs-result). If the corresponding input is found, you should see the corresponding tag element in the HTML inspector console.
 
-```{r shiny-find-inputs-result, echo=FALSE, fig.cap='find method output', out.width='100%'}
+```{r shiny-find-inputs-result, echo=FALSE, fig.cap='find method output'}
 knitr::include_graphics("images/survival-kit/shiny-find-inputs-result.png")
 ```
 
@@ -185,12 +211,12 @@ var f7ToggleBinding = new Shiny.InputBinding();
 });
 ```
 
-Once initialized, we may use all specific methods provided by the API. [Framework7](https://framework7.io) is clearly a gold mine, as its API provides many possible options for many inputs / widgets. 
+Once initialized, we may use all specific methods provided by the API. [Framework7](https://framework7.io) is clearly a gold mine, as its API provides many possible options for many inputs / widgets. Later in this section, we will demonstrate how to initialize a box element from the [AdminLTE2](https://adminlte.io/docs/2.4/js-box-widget) HTML template.
 
 #### Get the value
 `getValue(el)` returns the input value. The way to obtain the value is different for almost all inputs. For instance, the `textInput` is pretty simple since the value is located in the `value` attribute. `el` refers to the element holding the id attribute and recognized by the `find` method. Figure \@ref(fig:shiny-el) shows the result of a `console.log($(el));`.
 
-```{r shiny-el, echo=FALSE, fig.cap='About el', out.width='100%'}
+```{r shiny-el, echo=FALSE, fig.cap='About el'}
 knitr::include_graphics("images/survival-kit/shiny-el.png")
 ```
 
@@ -238,7 +264,7 @@ updateCustomTextInputExample(3)
 
 Figure \@ref(fig:shiny-update-inputs) illustrates the main mechanisms.
 
-```{r shiny-update-inputs, echo=FALSE, fig.cap='Events following a click on the update button. This figure demonstrates how R and JS communicate, through the websocket.', out.width='100%'}
+```{r shiny-update-inputs, echo=FALSE, fig.cap='Events following a click on the update button. This figure demonstrates how R and JS communicate, through the websocket.'}
 knitr::include_graphics("images/survival-kit/shiny-update-inputs.png")
 ```
 
@@ -335,170 +361,8 @@ Shiny.inputBindings.register(myBinding, 'reference');
 
 Although the Shiny [documentation](https://shiny.rstudio.com/articles/building-inputs.html) mentions a `Shiny.inputBindings.setPriority` method to handle conflicting bindings, this case almost never happens.
 
-### Edit an input binding
-In some cases, we would like to access the input binding and change it's default behavior, even though not always recommended, since it will affect **all** related inputs. As bindings are contained in a registry, namely `Shiny.inputBindings`, one may seamlessly access and modify them. This is a 5 steps process:
-
-1. Wait for the `shiny:connected` [event](https://shiny.rstudio.com/articles/js-events.html)
-2. Unbind all inputs with `Shiny.unbindAll()`
-3. Access the binding registry, `Shiny.inputBindings`
-4. Extend the binding and edit its content with `$.extend(... {...})`
-5. Apply the new changes with `Shiny.bindAll()`
-
-```js
-$(function() {
-  $(document).on('shiny:connected', function(event) {
-    Shiny.unbindAll();
-    $.extend(Shiny
-      .inputBindings
-      .bindingNames['shiny.actionButtonInput']
-      .binding, {
-        // do whathever you want to edit existing methods
-      });
-    Shiny.bindAll();
-  });
-});
-```
-
-### Update a binding from the client
-The interest of `receiveMessage` and `setValue` is to be able to update the input
-from the server side, that is R, through the `session$sendInputMessage`. Yet, 
-this task might be done directly on the client, thereby lowering the load on the server.
-We consider the following example: a shiny app contains 2 actions buttons, clicking on the first one
-increases the value of the second by 10. This won't be possible with the classic approach since a button click
-only increases by 1. How do we proceed? 
-
-1. We first set an event listener on the first button.
-2. We target the second button and get the input binding with `$obj.data('shiny-input-binding')`
-3. We recover the current value 
-4. We call the `setValue` method of the input binding adding 10 to the current value
-5. Importantly, to let Shiny update the value on the R side, we must trigger an event that will be detected in the `subscribe` method of the action button input binding. The action button only has 1 event listener but other may be added. Don't forget that triggering a `click` event would also increment the button value by 1! In the following we have to customize the `subscribe` method to work around
-
-```js
-$(function() {
-  // each time we click on #test (a button)
-  $('#button1').on('click', function() {
-    var $obj = $('#button2');
-    var inputBinding = $obj.data('shiny-input-binding');
-    var val = $obj.data('val') || 0;
-    inputBinding.setValue($obj, val + 10);
-    $obj.trigger('event');
-  });
-});
-```
-
-If you click on the second button, the value increments only by 1 and the plot will be only visible after 10 clicks, while only 1 click is necessary on the first button. The reset button resets the second action button value to 0. It implements the feature discussed in the previous part, where we extend the button binding to add a `reset` method and edit the `subscribe` method to add a `change` event listener, simply telling shiny to get the new value. Contrary to `click`, `change` does not increment the button value.
-
-```js
-$.extend(Shiny.inputBindings.bindingNames['shiny.actionButtonInput'].binding, {
-  reset: function(el) {
-   $(el).data('val', 0);
-  },
-  subscribe: function(el, callback) {
-    $(el).on('click.actionButtonInputBinding', function(e) {
-      var $el = $(this);
-      var val = $el.data('val') || 0;
-      $el.data('val', val + 1);
-
-      callback();
-    });
-            
-    // this does not trigger any click and won't change the button value            
-    $(el).on('change.actionButtonInputBinding', function(e) {
-      callback();
-    });
-  }
-});
-```
-
-Below is the working app.
-
-```{r access-binding-outside, eval=FALSE}
-ui <- fluidPage(
-  tags$head(
-    tags$script(
-      "$(function() {
-        $(document).on('shiny:connected', function(event) {
-          Shiny.unbindAll();
-          $.extend(Shiny
-            .inputBindings
-            .bindingNames['shiny.actionButtonInput']
-            .binding, {
-              reset: function(el) {
-               $(el).data('val', 0);
-              },
-              subscribe: function(el, callback) {
-                $(el).on('click.actionButtonInputBinding', function(e) {
-                  var $el = $(this);
-                  var val = $el.data('val') || 0;
-                  $el.data('val', val + 1);
-
-                  callback();
-                });
-                
-                $(el).on('change.actionButtonInputBinding', function(e) {
-                  debugger;
-                  callback();
-                });
-              
-              }
-            });
-          Shiny.bindAll();
-        });
-      
-        $('#button1').on('click', function() {
-          var $obj = $('#button2');
-          var inputBinding = $obj.data('shiny-input-binding');
-          var val = $obj.data('val') || 0;
-          inputBinding.setValue($obj, val + 10);
-          $obj.trigger('change'); 
-        });
-        $('#reset').on('click', function() {
-          var $obj = $('#button2');
-          var inputBinding = $obj.data('shiny-input-binding');
-          inputBinding.reset($obj);
-          $obj.trigger('change');
-        });
-      });
-      "
-    )
-  ),
-  actionButton("button1", icon("plus")),
-  actionButton("button2", uiOutput("val")),
-  actionButton("reset", icon("undo")),
-  plotOutput("plot")
-)
-
-server <- function(input, output) {
-  output$val <- renderUI({
-    paste("Value: ", input$button2)
-  })
-  
-  output$plot <- renderPlot({
-    validate(need(input$button2 >= 10, message = "Only visible after 10 clicks on the second button"))
-    hist(rnorm(100))
-  })
-  
-  observeEvent(input$button2, {
-    if (input$button2 == 0) {
-      showNotification(
-        "Button successfuly reset",
-        type = "warning"
-      )
-    }
-  })
-}
-
-shinyApp(ui, server)
-```
-
-This trick has been extensively used in the [virtual physiology simulator](https://community.rstudio.com/t/shiny-contest-submission-a-virtual-lab-for-teaching-physiology/25348) to trigger [animations](https://dgranjon.shinyapps.io/entry_level/).
-
-## Secondary inputs {#secondary-inputs}
-The Shiny input binding system is too convenient to be only used for primary input elements like `textInput`, `numericInput`. It is a super powerful tool to unleash your apps's interactivity. 
-In the following, we show how to add an input to an element that was not primarily designed to be a user input. 
-
-### {shinydashboard} boxes on steroids
-In {shinydashboard}, you may know the `box` function. Boxes are containers with a title, body, footer, as well as optional elements. It would be nice to capture the state of the box in an input, so as to trigger other actions as soon as this input changes. Since an input value is unique, we must add an `inputId` parameter to the box function. You may inspect the code [here](https://github.com/DivadNojnarg/outstanding-shiny-ui-code/blob/master/R/box2.R). 
+### Binding other elements
+The Shiny input binding system is too convenient to be only used it for input elements. In {shinydashboard}, you may know the `box` function. Boxes are containers with a title, body, footer, as well as optional elements. It would be nice to capture the state of the box in an input, so as to trigger other actions as soon as this input changes. Since an input value is unique, we must add an `inputId` parameter to the box function. You may inspect the code [here](https://github.com/DivadNojnarg/outstanding-shiny-ui-code/blob/master/R/box2.R). 
 
 Since we may collapse and uncollapse the box, we create the `updateBox2` function, which will toggle it:
 
@@ -513,11 +377,16 @@ When collapsed, a box gets the `collapsed-box` class. Note: this will be useful 
   - expanded.boxwidget (Triggered after the box is expanded)
   - collapsed.boxwidget (Triggered after the box is collapsed)
   
-Unfortunately, after further investigations, those events are not possible to use since the AdminLTE code does not trigger them in the main JS [code](https://github.com/rstudio/shinydashboard/blob/master/srcjs/AdminLTE/app.js) (see the collapse method line 577-612). There are other solutions, as shown below with the `click` event. To toggle the box, we use the `toggleBox` method. 
+Unfortunately, after further investigations, those events are not possible to use since the AdminLTE code does not trigger them in the main JS [code](https://github.com/rstudio/shinydashboard/blob/master/srcjs/AdminLTE/app.js) (see the collapse method line 577-612). There are other solutions, as shown below with the `click` event. 
+  
+There is also a plug and play `toggleBox` method. To unleash the power of our box, we need to activate it with `$('#<box_id>').activateBox();` before the binding step. If you remember, the `initialize` method is exactly doing this:
 
 ```javascript
 let boxBinding = new Shiny.InputBinding();
 $.extend(boxBinding, {
+  initialize: function(el) {
+    $(el).activateBox(); // box activation
+  },
   find: function(scope) {
     return $(scope).find('.box');
   },
@@ -600,248 +469,6 @@ ui <- fluidPage(
 
  shinyApp(ui, server)
 ```
-
-
-Even though animations are nice, it appears rather sub-optimal to wait 500 ms for a box to collapse. AdminLTE [options](https://adminlte.io/themes/AdminLTE/documentation/index.html#adminlte-options) allow to change this through the `$.AdminLTE.boxWidget` object. We specify the `animationSpeed` property to 10 milliseconds and update the input binding script to reduce the delay in the `subscribe` method (50 ms seems reasonable). To get a comparison try to run the example below.
-
-```{r, eval=FALSE}
-# You'll need the devel version of shinydashboardPlus
-#remotes::install_github("RinteRface/shinydashboardPlus")
-
-library(shiny)
-library(shinydashboard)
-library(shinydashboardPlus)
- 
- ui <- dashboardPage(
-   dashboardHeader(),
-   dashboardSidebar(),
-   dashboardBody(
-     tags$style("body { background-color: ghostwhite}"),
-     actionButton("toggle_box", "Toggle Box"),
-     br(),
-     box(
-       title = textOutput("box_state"),
-       "Box body",
-       inputId = "mybox",
-       collapsible = TRUE,
-       closable = TRUE,
-       plotOutput("plot")
-     )
-   )
- )
- 
- server <- function(input, output, session) {
-   output$plot <- renderPlot({
-     req(!input$mybox$collapsed)
-     plot(rnorm(200))
-   })
-   
-   output$box_state <- renderText({
-     state <- if (input$mybox$collapsed) "collapsed" else "uncollapsed"
-     paste("My box is", state)
-   })
-   
-   observeEvent(input$toggle_box, {
-     updateBox("mybox", action = "toggle")
-   })
-   
-   
-   observeEvent(input$mybox$collapsed, {
-     collapsed <- if (input$mybox$collapsed) "collapsed" else "uncollapsed"
-     message <- paste("My box is", collapsed)
-     showNotification(message, type = "warning", duration = 1)
-   })
-   
- }
- 
- shinyApp(ui, server)
-
-```
-
-### Going further
-We may imagine leveraging the input binding system to update any box property and get rid of the classic `renderUI` approach. Indeed, until now, there would be only one way to update a box from the server:
-
-```{r, eval=FALSE}
-ui <- fluidPage(
-  # import shinydashboard deps without the need of the dashboard template
-  useShinydashboard(),
-
-  tags$style("body { background-color: ghostwhite};"),
-
-  br(),
-  uiOutput("custom_box"),
-  selectInput("background", "Background", choices = shinydashboard:::validColors)
- )
-
- server <- function(input, output, session) {
-  output$custom_box <- renderUI({
-    box2(
-      title = "Box",
-      "Box body",
-      background = input$background
-    )
-  })
- }
-
- shinyApp(ui, server)
-```
-
-The whole piece of UI is re-rendered each time, while only the box class should be modified. This does not have much impact here but for a very complex app festooned with inputs/outputs, the overall user experience may be altered.
-
-To do so, we proceed in 2 steps. The first part consists in customizing the `box` function to gather as many parameter as possible in an option list. For instance, we choose to extract background, width and title. width and background are expected to be numeric and character, respectively, while title might be any HTML tag, justifying the use of `as.character`.
-
-```{r, eval=FALSE}
-box2 <- function(..., id = NULL, title = NULL, footer = NULL,
-                 background = NULL, width = 6, height = NULL,
-                 collapsible = FALSE, collapsed = FALSE) {
-  
-  props <- dropNulls(
-    list(
-      title = as.character(title),
-      background = background,
-      width = width
-    )
-  )
-  
-  # I removed some of the code to highlight that part
-}
-```
-
-This properties list has to be treated on the JS side. Before, we must make it accessible within the `box2`
-HTML tag. We choose the following approach, where we convert our properties to a JSON with `jsonlite::toJSON` and embed them in a script tag. Note the `data-for` attribute with the unique id parameter. This will guarantee the uniqueness of our configuration script.
-
-```{r}
-box2 <- function(..., id = NULL, title = NULL, footer = NULL,
-                 background = NULL, width = 6, height = NULL,
-                 collapsible = FALSE, collapsed = FALSE) {
-  
-  # code not shown
-  
-  boxTag <- shiny::tags$div(
-    class = if (!is.null(width)) paste0("col-sm-", width), 
-    shiny::tags$div(
-      id = id,
-      class = boxClass, 
-      headerTag, 
-      shiny::tags$div(
-        class = "box-body", 
-        style = style,
-        ...,
-        sidebar[c(1, 3)],
-      ), 
-      if (!is.null(footer)) shiny::tags$div(
-        class = if (isTRUE(footerPadding)) "box-footer" else "box-footer no-padding", footer)
-    ),
-    
-    # this will make our props accessible from JS
-    shiny::tags$script(
-      type = "application/json",
-      `data-for` = id,
-      jsonlite::toJSON(
-        x = props,
-        auto_unbox = TRUE,
-        json_verbatim = TRUE
-      )
-    )
-  )
-  
-  boxTag
-  
-}
-```
-
-Then, we have to update the `updateBox2` such that it handles both toggle and update possibilities. `options` contains all updatable properties like background, title and width.
-We don't describe the toggle case since it is quite similar to the previous implementations. When the action is `update`, we enter the if statement and options must be processed. If the option element is a shiny tag or a list of shiny tag (`tagList`), we convert it to character. The returned message is a vector containing the action as well as the option list. 
-
-```{r, eval = FALSE}
-updateBox2 <- function(id, action = c("toggle", "update"), options = NULL,
-                      session = getDefaultReactiveDomain()) {
-  # for update, we take a list of options
-  if (action == "update") {
-    # handle case whare options are shiny tag or a list of tags ...
-    options <- lapply(options, function(o) {
-      if (inherits(o, "shiny.tag") || inherits(o, "shiny.tag.list")) {
-        o <- as.character(o)
-      }
-      o
-    })
-    message <- dropNulls(c(action = action, options = options))
-    session$sendInputMessage(id, message)
-  } else {
-    session$sendInputMessage(id, message = action)
-  }
-}
-```
-
-On the JS side, we modify the `setValue` method to import our newly defined properties. The `boxTag` has two children, the box and the configuration script. `$(el)` refers to the box, therefore we have to look one level up to be able to use the `find` method (find always goes deeper in the DOM), namely `$(el).parent()`. From there, we only have to target the script tag `$(el).parent().find("script[data-for='" + el.id + "']")`. Once captured in a variable, we parse the corresponding element to convert it to an objects that we can manipulate: for instance `config.width` returns the initial width. `value.options.width` will contain the new width value provided in the `updateBox2` message output. Good practice is to check whether `value.options.width` exists with `value.options.hasOwnProperty("width")`. If yes we ensure whether its value and `config.width` are different. We always choose `===` which compares the type and the value (`==` only compares the value such that `"1" == 1` is `true`). We then call the internal method `_updateWidth` which is defined in the input binding. It has 3 parameters, el, o and n (o and n being the old and new values, respectively):
-
-```js
-_updateWidth: function(el, o, n) {
-  // removes old class
-  $(el).parent().toggleClass("col-sm-" + o);
-  $(el).parent().addClass("col-sm-" + n); 
-  // trigger resize so that output resize
-  $(el).trigger('resize');
-}
-```
-
-We must trigger a `resize` event so that output correctly scale. The internal method is identified by an underscore since it is not an inherited `Shiny.InputBinding` method. 
-
-We finally update the config value by the newly set value and repeat the process for any other property.
-
-```js
-setValue: function(el, value) {
-  var config = $(el).parent().find("script[data-for='" + el.id + "']");
-  config = JSON.parse(config.html());
-  
-  // JS logic
-  if (value.action === "update") {
-    if (value.options.hasOwnProperty("width")) {
-      if (value.options.width !== config.width) {
-        this._updateWidth(el, config.width, value.options.width)
-        config.width = value.options.width;
-      }
-    }
-    // other items to update
-    
-    // replace the old JSON config by the new one to update the input value 
-    $(el)
-      .parent()
-      .find("script[data-for='" + el.id + "']")
-      .replaceWith(
-        '<script type="application/json" data-for="' + 
-        el.id + 
-        '">' + 
-        JSON.stringify(config) + 
-        '</script>'
-      );
-    
-  } else {
-    // other tasks
-  }
-  
-}
-```
-
-Don't forget to update the config script attached to the card tag at the end of the update
-condition, otherwise the input value won't be updated:
-
-```js
-$(el)
-  .parent()
-  .find("script[data-for='" + el.id + "']")
-  .replaceWith(
-    '<script type="application/json" data-for="' + 
-    el.id + 
-    '">' + 
-    JSON.stringify(config) + 
-    '</script>'
-  );
-```
-
-If it represents a significant amount of work, it is also the guarantee to lower the load on the server side.
-
-Be careful with `this`. Indeed, called in an event listener, `this` refers to the element that triggered the event and not to the input binding object!
 
 ## Utilities to quickly define new inputs
 
@@ -957,4 +584,70 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+```
+
+## Miscellaneous
+We present some tools that may be useful...TO FINISH
+
+### Get access to initial values 
+Something we may notice when exploring the `initShiny` function is the existence of a `Shiny.shinyapp` object, defined as follows:
+
+```javascript
+var shinyapp = exports.shinyapp = new ShinyApp();
+```
+
+
+Let's explore what `shinyApp` contains. The definition is located in the shinyapps.js [script](https://github.com/rstudio/shiny/blob/master/srcjs/shinyapp.js). 
+
+```javascript
+var ShinyApp = function() {
+  this.$socket = null;
+  
+  // Cached input values
+  this.$inputValues = {};
+  
+  // Input values at initialization (and reconnect)
+  this.$initialInput = {};
+  
+  // Output bindings
+  this.$bindings = {};
+  
+  // Cached values/errors
+  this.$values = {};
+  this.$errors = {};
+  
+  // Conditional bindings (show/hide element based on expression)
+  this.$conditionals = {};
+  
+  this.$pendingMessages = [];
+  this.$activeRequests = {};
+  this.$nextRequestId = 0;
+  
+  this.$allowReconnect = false;
+};
+```
+
+It creates several properties, some of them are easy to guess like `inputValues` or `initialInput`. Let's run the example below and open the HTML inspector. Notice that the `sliderInput` is set to 500 at `t0` (initialization).
+
+```{r, eval=FALSE}
+ui <- fluidPage(
+  sliderInput("obs", "Number of observations:",
+              min = 0, max = 1000, value = 500
+  ),
+  plotOutput("distPlot")
+)
+
+server <- function(input, output, session) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs))
+  })
+}
+shinyApp(ui, server)
+```
+
+
+Figure \@ref(fig:shiny-initial-inputs) shows how to access Shiny's initial input value with `Shiny.shinyapp.$initialInput.obs`. After changing the slider position, its value is given by `Shiny.shinyapp.$inputValues.obs`. `$initialInput` and `$inputValues` contains many more elements, however we are only interested in the slider function in this example.
+
+```{r shiny-initial-inputs, echo=FALSE, fig.cap='Explore initial input values'}
+knitr::include_graphics("images/survival-kit/shiny-init-input.png")
 ```

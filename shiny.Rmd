@@ -1,1 +1,1 @@
-# (PART\*) Unleash interactivity with JavaScript {-}
+# (PART\*) Shiny: What's under the Hood? {-}
