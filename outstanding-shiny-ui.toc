@@ -1,239 +1,160 @@
-\contentsline {fm}{List of Tables}{xi}{chapter*.1}%
-\contentsline {fm}{List of Figures}{xiii}{chapter*.2}%
-\contentsline {fm}{Welcome}{xvii}{chapter*.3}%
-\contentsline {chapter}{\numberline {1}Shiny and the Web}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Shiny generates HTML code from R}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}HTML 101}{2}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}HTML Basics}{2}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Tag attributes}{3}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}The simplest HTML skeleton}{4}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}About the Document Object Model (DOM)}{5}{subsection.1.2.4}%
-\contentsline {subsubsection}{\numberline {1.2.4.1}Visualizing the DOM with the HTML inspector}{5}{subsubsection.1.2.4.1}%
-\contentsline {subsubsection}{\numberline {1.2.4.2}HTML Inspector 101}{6}{subsubsection.1.2.4.2}%
-\contentsline {paragraph}{\numberline {1.2.4.2.1}Altering the DOM structure}{7}{paragraph.1.2.4.2.1}%
-\contentsline {subsection}{\numberline {1.2.5}Preliminary introduction to CSS and JavaScript}{10}{subsection.1.2.5}%
-\contentsline {subsubsection}{\numberline {1.2.5.1}HTML and CSS}{10}{subsubsection.1.2.5.1}%
-\contentsline {subsubsection}{\numberline {1.2.5.2}Modifying CSS with the HTML inspector}{14}{subsubsection.1.2.5.2}%
-\contentsline {paragraph}{\numberline {1.2.5.2.1}Add inline properties}{14}{paragraph.1.2.5.2.1}%
-\contentsline {paragraph}{\numberline {1.2.5.2.2}View local changes}{14}{paragraph.1.2.5.2.2}%
-\contentsline {subsubsection}{\numberline {1.2.5.3}HTML and JavaScript}{15}{subsubsection.1.2.5.3}%
-\contentsline {chapter}{\numberline {2}Discover Shiny dependencies}{19}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{19}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Bootstrap}{20}{section.2.2}%
-\contentsline {section}{\numberline {2.3}jQuery, DOM manipulation}{21}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Data formating}{22}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Custom dependencies}{22}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Exercise}{23}{section.2.6}%
-\contentsline {chapter}{\numberline {3}htmltools overview}{29}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Writing HTML Tags from R}{29}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Notations}{30}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Adding new tags}{30}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Alternative way to write tags}{31}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Playing with tags}{33}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Tags structure}{33}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Useful functions for tags}{34}{subsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.2.1}Add attributes}{34}{subsubsection.3.5.2.1}%
-\contentsline {subsubsection}{\numberline {3.5.2.2}Check if tag has specific attribute}{34}{subsubsection.3.5.2.2}%
-\contentsline {subsubsection}{\numberline {3.5.2.3}Get all attributes}{35}{subsubsection.3.5.2.3}%
-\contentsline {subsubsection}{\numberline {3.5.2.4}Set child/children}{35}{subsubsection.3.5.2.4}%
-\contentsline {subsubsection}{\numberline {3.5.2.5}Add child or children}{35}{subsubsection.3.5.2.5}%
-\contentsline {subsubsection}{\numberline {3.5.2.6}Build your own functions}{36}{subsubsection.3.5.2.6}%
-\contentsline {subsection}{\numberline {3.5.3}Other functions}{37}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Conditionally set attributes}{37}{subsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.5.5}Using \%\textgreater \%}{38}{subsection.3.5.5}%
-\contentsline {subsection}{\numberline {3.5.6}Programmatically create children elements}{39}{subsection.3.5.6}%
-\contentsline {section}{\numberline {3.6}Exercises}{39}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Exercise 1: tags structure (5 minutes)}{39}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Exercise 2: modifiying tags (5 minutes)}{40}{subsection.3.6.2}%
-\contentsline {chapter}{\numberline {4}Dependency utilities}{41}{chapter.4}%
-\contentsline {section}{\numberline {4.1}The dirty approach}{41}{section.4.1}%
-\contentsline {section}{\numberline {4.2}The clean approach}{43}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Another example: Importing HTML dependencies from other packages}{45}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Suppress dependencies}{49}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Resolve dependencies}{49}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Insert Custom script in the head}{50}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Introduction to CSS}{59}{chapter.5}%
-\contentsline {section}{\numberline {5.1}How to include CSS?}{59}{section.5.1}%
-\contentsline {section}{\numberline {5.2}CSS selectors}{60}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Basics}{60}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Select by class, id}{61}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Apply CSS to single elements}{62}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Advanced selectors}{63}{subsection.5.2.4}%
-\contentsline {subsubsection}{\numberline {5.2.4.1}Select nested tags}{63}{subsubsection.5.2.4.1}%
-\contentsline {subsubsection}{\numberline {5.2.4.2}Select by attributes}{66}{subsubsection.5.2.4.2}%
-\contentsline {subsubsection}{\numberline {5.2.4.3}Other selectors}{68}{subsubsection.5.2.4.3}%
-\contentsline {subsubsection}{\numberline {5.2.4.4}Direct descendants}{68}{subsubsection.5.2.4.4}%
-\contentsline {paragraph}{\numberline {5.2.4.4.1}Pseudo-classes}{70}{paragraph.5.2.4.4.1}%
-\contentsline {paragraph}{\numberline {5.2.4.4.2}Pseudo-elements}{72}{paragraph.5.2.4.4.2}%
-\contentsline {section}{\numberline {5.3}CSS in action}{73}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Text Styling}{74}{subsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.1.1}Polices}{74}{subsubsection.5.3.1.1}%
-\contentsline {subsubsection}{\numberline {5.3.1.2}Size}{74}{subsubsection.5.3.1.2}%
-\contentsline {subsubsection}{\numberline {5.3.1.3}Alignement}{75}{subsubsection.5.3.1.3}%
-\contentsline {subsubsection}{\numberline {5.3.1.4}Other styling properties}{75}{subsubsection.5.3.1.4}%
-\contentsline {subsection}{\numberline {5.3.2}Colors}{75}{subsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.2.1}Text color}{76}{subsubsection.5.3.2.1}%
-\contentsline {subsubsection}{\numberline {5.3.2.2}Background color}{76}{subsubsection.5.3.2.2}%
-\contentsline {subsection}{\numberline {5.3.3}Layout}{76}{subsection.5.3.3}%
-\contentsline {subsubsection}{\numberline {5.3.3.1}Style blocks}{76}{subsubsection.5.3.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.3.2}Flexbox}{80}{subsubsection.5.3.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.3.3}Grid model}{83}{subsubsection.5.3.3.3}%
-\contentsline {section}{\numberline {5.4}Best practice}{83}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}DRY principles}{83}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Selector specificity}{84}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Block element modified (BEM)}{86}{subsection.5.4.3}%
-\contentsline {section}{\numberline {5.5}Exercises}{86}{section.5.5}%
-\contentsline {chapter}{\numberline {6}Introduction to SASS}{87}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Variables}{87}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Loops}{87}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Conditions}{87}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Beautify with fresh}{89}{chapter.7}%
-\contentsline {section}{\numberline {7.1}\{fresh\}, the big picture}{89}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Customize \texttt {\{bs4Dash\}}}{89}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Customize \texttt {\{shinydashboard\}}}{94}{subsection.7.1.2}%
-\contentsline {chapter}{\numberline {8}Beautify with bootstraplib}{99}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Disclaimer}{99}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Plug and play customization}{99}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Dynamic theming}{101}{section.8.3}%
+\contentsline {chapter}{Prerequisites}{7}{chapter*.2}%
+\contentsline {section}{Disclaimer}{7}{section*.3}%
+\contentsline {section}{Is this book for me?}{7}{section*.4}%
+\contentsline {section}{Related content}{7}{section*.5}%
+\contentsline {section}{Acknowledgements}{7}{section*.6}%
+\contentsline {section}{Packages}{8}{section*.7}%
+\contentsline {chapter}{\numberline {1}Introduction}{9}{chapter.1}%
+\contentsline {section}{\numberline {1.1}About the code}{10}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Preliminary exercices}{10}{section.1.2}%
+\contentsline {part}{Survival Kit}{15}{part*.8}%
+\contentsline {chapter}{\numberline {2}HTML}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}HTML Basics}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Tag attributes}{18}{section.2.2}%
+\contentsline {section}{\numberline {2.3}HTML page: skeleton}{19}{section.2.3}%
+\contentsline {section}{\numberline {2.4}About the Document Object Model (DOM)}{20}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Visualizing the DOM: the HTML inspector}{20}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}Preliminary introduction to CSS and JavaScript}{20}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}HTML and CSS}{24}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}HTML and JavaScript}{24}{subsection.2.5.2}%
+\contentsline {chapter}{\numberline {3}JavaScript}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{27}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Setup}{29}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Node}{29}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Choose a good IDE}{29}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}First Script}{29}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Programming with JS: basis}{32}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}JS types}{32}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Variables}{32}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}Const}{33}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}let}{33}{subsubsection.3.3.2.2}%
+\contentsline {subsection}{\numberline {3.3.3}Conditions}{34}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Objects}{35}{subsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.4.1}Arrays}{36}{subsubsection.3.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.3.4.2}Strings}{37}{subsubsection.3.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.3.4.3}Math}{37}{subsubsection.3.3.4.3}%
+\contentsline {subsection}{\numberline {3.3.5}Iterations}{37}{subsection.3.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.5.1}For loops}{38}{subsubsection.3.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.3.5.2}Other iterations: while}{39}{subsubsection.3.3.5.2}%
+\contentsline {subsection}{\numberline {3.3.6}Functions}{39}{subsection.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.6.1}Export functions: about modules}{39}{subsubsection.3.3.6.1}%
+\contentsline {subsection}{\numberline {3.3.7}Event listeners}{40}{subsection.3.3.7}%
+\contentsline {section}{\numberline {3.4}jQuery}{41}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Introduction}{41}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Syntax}{41}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Useful functions}{42}{subsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.3.1}Travel in the DOM}{42}{subsubsection.3.4.3.1}%
+\contentsline {subsubsection}{\numberline {3.4.3.2}Manipulate tags}{43}{subsubsection.3.4.3.2}%
+\contentsline {subsection}{\numberline {3.4.4}Chaining jQuery methods}{44}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Iterations}{44}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}Good practice}{45}{subsection.3.4.6}%
+\contentsline {subsection}{\numberline {3.4.7}Events}{45}{subsection.3.4.7}%
+\contentsline {subsection}{\numberline {3.4.8}Extending objects}{46}{subsection.3.4.8}%
+\contentsline {part}{Shiny: What's under the Hood?}{49}{part*.9}%
+\contentsline {chapter}{\numberline {4}Introduction}{49}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Shiny, HTML, CSS and JavaScript}{49}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Websocket: R/JS bidirectional communication}{50}{section.4.2}%
+\contentsline {section}{\numberline {4.3}The Shiny session object}{51}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Shiny's input system}{55}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Shiny JavaScript sources}{56}{section.5.1}%
+\contentsline {section}{\numberline {5.2}The Shiny JavaScript object}{56}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Initialization}{59}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Input bindings}{59}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Input structure}{59}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Binding Shiny inputs}{60}{subsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.1}Find the input}{60}{subsubsection.5.4.2.1}%
+\contentsline {subsubsection}{\numberline {5.4.2.2}Initialize inputs}{63}{subsubsection.5.4.2.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.3}Get the value}{64}{subsubsection.5.4.2.3}%
+\contentsline {subsubsection}{\numberline {5.4.2.4}Set and update}{66}{subsubsection.5.4.2.4}%
+\contentsline {subsubsection}{\numberline {5.4.2.5}Subscribe}{68}{subsubsection.5.4.2.5}%
+\contentsline {subsubsection}{\numberline {5.4.2.6}Setting rate policies}{69}{subsubsection.5.4.2.6}%
+\contentsline {subsubsection}{\numberline {5.4.2.7}Register an input binding}{70}{subsubsection.5.4.2.7}%
+\contentsline {subsection}{\numberline {5.4.3}Binding other elements}{70}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}Utilities to quickly define new inputs}{73}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Introduction}{73}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Examples}{73}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Custom data format}{74}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}Miscellaneous}{76}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Get access to initial values}{76}{subsection.5.6.1}%
+\contentsline {chapter}{\numberline {6}Custom handlers: from R to JavaScript}{79}{chapter.6}%
+\contentsline {part}{htmltools}{85}{part*.10}%
+\contentsline {chapter}{\numberline {7}htmltools overview}{87}{chapter.7}%
+\contentsline {section}{\numberline {7.1}HTML Tags}{87}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Notations}{87}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Adding new tags}{87}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Alternative way to write tags}{88}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Playing with tags}{88}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Tags structure}{88}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Useful functions for tags}{89}{subsection.7.5.2}%
+\contentsline {subsubsection}{\numberline {7.5.2.1}Add attributes}{89}{subsubsection.7.5.2.1}%
+\contentsline {subsubsection}{\numberline {7.5.2.2}Check if tag has specific attribute}{90}{subsubsection.7.5.2.2}%
+\contentsline {subsubsection}{\numberline {7.5.2.3}Get all attributes}{90}{subsubsection.7.5.2.3}%
+\contentsline {subsubsection}{\numberline {7.5.2.4}Set child/children}{90}{subsubsection.7.5.2.4}%
+\contentsline {subsubsection}{\numberline {7.5.2.5}Add child or children}{91}{subsubsection.7.5.2.5}%
+\contentsline {subsection}{\numberline {7.5.3}Other interesting functions}{92}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Conditionally set attributes}{92}{subsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.5.5}Using \%\textgreater \%}{93}{subsection.7.5.5}%
+\contentsline {subsection}{\numberline {7.5.6}Programmatically create children elements}{93}{subsection.7.5.6}%
+\contentsline {chapter}{\numberline {8}Dependency utilities}{95}{chapter.8}%
+\contentsline {section}{\numberline {8.1}The dirty approach}{95}{section.8.1}%
+\contentsline {section}{\numberline {8.2}The clean approach}{97}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Another example: Importing HTML dependencies from other packages}{98}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Suppress dependencies}{101}{section.8.4}%
 \contentsline {chapter}{\numberline {9}Other tools}{103}{chapter.9}%
 \contentsline {section}{\numberline {9.1}CSS}{103}{section.9.1}%
-\contentsline {chapter}{\numberline {10}JavaScript for Shiny}{107}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Shiny JavaScript sources}{107}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Introduction to JavaScript}{109}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Setup}{110}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}Node}{110}{subsection.10.3.1}%
-\contentsline {subsection}{\numberline {10.3.2}Choose a good IDE}{111}{subsection.10.3.2}%
-\contentsline {subsection}{\numberline {10.3.3}First Script}{111}{subsection.10.3.3}%
-\contentsline {section}{\numberline {10.4}Programming with JS: basis}{113}{section.10.4}%
-\contentsline {subsection}{\numberline {10.4.1}JS types}{113}{subsection.10.4.1}%
-\contentsline {subsection}{\numberline {10.4.2}Variables}{113}{subsection.10.4.2}%
-\contentsline {subsubsection}{\numberline {10.4.2.1}Const}{114}{subsubsection.10.4.2.1}%
-\contentsline {subsubsection}{\numberline {10.4.2.2}let}{114}{subsubsection.10.4.2.2}%
-\contentsline {subsection}{\numberline {10.4.3}Conditions}{115}{subsection.10.4.3}%
-\contentsline {subsection}{\numberline {10.4.4}Objects}{116}{subsection.10.4.4}%
-\contentsline {subsubsection}{\numberline {10.4.4.1}Arrays}{118}{subsubsection.10.4.4.1}%
-\contentsline {subsubsection}{\numberline {10.4.4.2}Strings}{119}{subsubsection.10.4.4.2}%
-\contentsline {subsubsection}{\numberline {10.4.4.3}Math}{119}{subsubsection.10.4.4.3}%
-\contentsline {subsection}{\numberline {10.4.5}Iterations}{119}{subsection.10.4.5}%
-\contentsline {subsubsection}{\numberline {10.4.5.1}For loops}{119}{subsubsection.10.4.5.1}%
-\contentsline {subsubsection}{\numberline {10.4.5.2}Other iterations: while}{121}{subsubsection.10.4.5.2}%
-\contentsline {subsection}{\numberline {10.4.6}Functions}{121}{subsection.10.4.6}%
-\contentsline {subsubsection}{\numberline {10.4.6.1}Export functions: about modules}{122}{subsubsection.10.4.6.1}%
-\contentsline {subsection}{\numberline {10.4.7}Event listeners}{122}{subsection.10.4.7}%
-\contentsline {section}{\numberline {10.5}jQuery}{123}{section.10.5}%
-\contentsline {subsection}{\numberline {10.5.1}Introduction}{123}{subsection.10.5.1}%
-\contentsline {subsection}{\numberline {10.5.2}Syntax}{124}{subsection.10.5.2}%
-\contentsline {subsection}{\numberline {10.5.3}Useful functions}{125}{subsection.10.5.3}%
-\contentsline {subsubsection}{\numberline {10.5.3.1}Travel in the DOM}{125}{subsubsection.10.5.3.1}%
-\contentsline {subsubsection}{\numberline {10.5.3.2}Manipulate tags}{126}{subsubsection.10.5.3.2}%
-\contentsline {subsection}{\numberline {10.5.4}Chaining jQuery methods}{127}{subsection.10.5.4}%
-\contentsline {subsection}{\numberline {10.5.5}Iterations}{127}{subsection.10.5.5}%
-\contentsline {subsection}{\numberline {10.5.6}Good practice}{128}{subsection.10.5.6}%
-\contentsline {subsection}{\numberline {10.5.7}Events}{129}{subsection.10.5.7}%
-\contentsline {subsection}{\numberline {10.5.8}Extending objects}{129}{subsection.10.5.8}%
-\contentsline {section}{\numberline {10.6}Shiny, JavaScript and the HTML inspector}{130}{section.10.6}%
-\contentsline {subsection}{\numberline {10.6.1}The console panel}{130}{subsection.10.6.1}%
-\contentsline {subsubsection}{\numberline {10.6.1.1}A real REPL}{130}{subsubsection.10.6.1.1}%
-\contentsline {subsubsection}{\numberline {10.6.1.2}Track errors and warnings}{132}{subsubsection.10.6.1.2}%
-\contentsline {subsection}{\numberline {10.6.2}Debug Shiny/JS code with the inspector}{132}{subsection.10.6.2}%
-\contentsline {section}{\numberline {10.7}Exercises}{135}{section.10.7}%
-\contentsline {subsection}{\numberline {10.7.1}Exercise 1: define variables}{135}{subsection.10.7.1}%
-\contentsline {subsection}{\numberline {10.7.2}Exercise 2: define objects}{135}{subsection.10.7.2}%
-\contentsline {subsection}{\numberline {10.7.3}Exercise 3: jQuery}{136}{subsection.10.7.3}%
-\contentsline {subsection}{\numberline {10.7.4}Exercise 4: a pure JS action button}{137}{subsection.10.7.4}%
-\contentsline {chapter}{\numberline {11}Shiny's internal: session and websockets}{139}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Websocket: R/JS bidirectional communication}{139}{section.11.1}%
-\contentsline {subsection}{\numberline {11.1.1}Shiny: websocket server side}{142}{subsection.11.1.1}%
-\contentsline {subsubsection}{\numberline {11.1.1.1}Websocket creation}{142}{subsubsection.11.1.1.1}%
-\contentsline {subsubsection}{\numberline {11.1.1.2}The Shiny session object}{143}{subsubsection.11.1.1.2}%
-\contentsline {subsection}{\numberline {11.1.2}Shiny: Websocket client side}{145}{subsection.11.1.2}%
-\contentsline {subsection}{\numberline {11.1.3}Example}{147}{subsection.11.1.3}%
-\contentsline {section}{\numberline {11.2}The Shiny JavaScript object}{149}{section.11.2}%
-\contentsline {chapter}{\numberline {12}Shiny's input system}{151}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Input bindings}{152}{section.12.1}%
-\contentsline {subsection}{\numberline {12.1.1}Input structure}{153}{subsection.12.1.1}%
-\contentsline {subsection}{\numberline {12.1.2}Binding Shiny inputs}{153}{subsection.12.1.2}%
-\contentsline {subsubsection}{\numberline {12.1.2.1}Find the input}{154}{subsubsection.12.1.2.1}%
-\contentsline {subsubsection}{\numberline {12.1.2.2}Initialize inputs}{156}{subsubsection.12.1.2.2}%
-\contentsline {subsubsection}{\numberline {12.1.2.3}Get the value}{158}{subsubsection.12.1.2.3}%
-\contentsline {subsubsection}{\numberline {12.1.2.4}Set and update}{159}{subsubsection.12.1.2.4}%
-\contentsline {subsubsection}{\numberline {12.1.2.5}Subscribe}{161}{subsubsection.12.1.2.5}%
-\contentsline {subsubsection}{\numberline {12.1.2.6}Setting rate policies}{162}{subsubsection.12.1.2.6}%
-\contentsline {subsubsection}{\numberline {12.1.2.7}Register an input binding}{162}{subsubsection.12.1.2.7}%
-\contentsline {subsection}{\numberline {12.1.3}Edit an input binding}{163}{subsection.12.1.3}%
-\contentsline {subsection}{\numberline {12.1.4}Update a binding from the client}{164}{subsection.12.1.4}%
-\contentsline {section}{\numberline {12.2}Examples}{167}{section.12.2}%
-\contentsline {subsection}{\numberline {12.2.1}\{shinydashboard\} boxes on steroids}{167}{subsection.12.2.1}%
-\contentsline {subsection}{\numberline {12.2.2}Going further}{172}{subsection.12.2.2}%
-\contentsline {section}{\numberline {12.3}Utilities to quickly define new inputs}{176}{section.12.3}%
-\contentsline {subsection}{\numberline {12.3.1}Introduction}{176}{subsection.12.3.1}%
-\contentsline {subsection}{\numberline {12.3.2}Examples}{176}{subsection.12.3.2}%
-\contentsline {subsection}{\numberline {12.3.3}Custom data format}{178}{subsection.12.3.3}%
-\contentsline {chapter}{\numberline {13}Shiny inputs lifecycles}{181}{chapter.13}%
-\contentsline {section}{\numberline {13.1}App initialization}{181}{section.13.1}%
-\contentsline {section}{\numberline {13.2}Update input}{184}{section.13.2}%
-\contentsline {chapter}{\numberline {14}Hidden gems about inputs}{189}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Get the last changed input}{189}{section.14.1}%
-\contentsline {subsection}{\numberline {14.1.1}Motivations}{189}{subsection.14.1.1}%
-\contentsline {subsection}{\numberline {14.1.2}JavaScript, my friend}{190}{subsection.14.1.2}%
-\contentsline {subsection}{\numberline {14.1.3}Example}{191}{subsection.14.1.3}%
-\contentsline {subsection}{\numberline {14.1.4}About \{shinylogs\}}{191}{subsection.14.1.4}%
-\contentsline {chapter}{\numberline {15}Custom handlers: from R to JavaScript}{193}{chapter.15}%
-\contentsline {section}{\numberline {15.1}Introduction}{193}{section.15.1}%
-\contentsline {section}{\numberline {15.2}Dynamically insert content}{196}{section.15.2}%
-\contentsline {section}{\numberline {15.3}Simple HTML}{196}{section.15.3}%
-\contentsline {section}{\numberline {15.4}HTML with extra dependencies}{196}{section.15.4}%
-\contentsline {subsection}{\numberline {15.4.1}Example}{196}{subsection.15.4.1}%
-\contentsline {chapter}{\numberline {16}Template selection}{205}{chapter.16}%
-\contentsline {chapter}{\numberline {17}Define dependencies}{207}{chapter.17}%
-\contentsline {section}{\numberline {17.1}Discover the project}{207}{section.17.1}%
-\contentsline {section}{\numberline {17.2}Identify mandatory dependencies}{208}{section.17.2}%
-\contentsline {section}{\numberline {17.3}Bundle dependencies}{209}{section.17.3}%
-\contentsline {chapter}{\numberline {18}Template skeleton}{213}{chapter.18}%
-\contentsline {section}{\numberline {18.1}Identify template elements}{213}{section.18.1}%
-\contentsline {section}{\numberline {18.2}Design the page layout}{213}{section.18.2}%
-\contentsline {subsection}{\numberline {18.2.1}The page wrapper}{213}{subsection.18.2.1}%
-\contentsline {subsection}{\numberline {18.2.2}The body content}{218}{subsection.18.2.2}%
-\contentsline {subsection}{\numberline {18.2.3}The footer}{218}{subsection.18.2.3}%
-\contentsline {subsection}{\numberline {18.2.4}The navbar (or header)}{219}{subsection.18.2.4}%
-\contentsline {subsubsection}{\numberline {18.2.4.1}Navbar navigation}{222}{subsubsection.18.2.4.1}%
-\contentsline {subsubsection}{\numberline {18.2.4.2}Fine tune tabs behavior}{225}{subsubsection.18.2.4.2}%
-\contentsline {subsection}{\numberline {18.2.5}Card containers}{226}{subsection.18.2.5}%
-\contentsline {subsubsection}{\numberline {18.2.5.1}Classic card}{227}{subsubsection.18.2.5.1}%
-\contentsline {subsection}{\numberline {18.2.6}Ribbons: card components}{230}{subsection.18.2.6}%
-\contentsline {subsection}{\numberline {18.2.7}Icons}{233}{subsection.18.2.7}%
-\contentsline {section}{\numberline {18.3}Exercises}{233}{section.18.3}%
-\contentsline {chapter}{\numberline {19}Testing and validating templates elements}{235}{chapter.19}%
-\contentsline {section}{\numberline {19.1}Validate template functions}{235}{section.19.1}%
-\contentsline {subsection}{\numberline {19.1.1}Create your own validations}{235}{subsection.19.1.1}%
-\contentsline {subsection}{\numberline {19.1.2}Existing utils functions}{239}{subsection.19.1.2}%
-\contentsline {subsubsection}{\numberline {19.1.2.1}Validating tags}{239}{subsubsection.19.1.2.1}%
-\contentsline {subsubsection}{\numberline {19.1.2.2}Validating CSS units}{240}{subsubsection.19.1.2.2}%
-\contentsline {subsection}{\numberline {19.1.3}Example: refine navbar menu items}{240}{subsection.19.1.3}%
-\contentsline {subsubsection}{\numberline {19.1.3.1}Avoid wrong jQuery selectors}{240}{subsubsection.19.1.3.1}%
-\contentsline {subsubsection}{\numberline {19.1.3.2}Checking for multiple selected items}{242}{subsubsection.19.1.3.2}%
-\contentsline {section}{\numberline {19.2}Testing templates elements}{243}{section.19.2}%
-\contentsline {subsection}{\numberline {19.2.1}Testing template behavior}{245}{subsection.19.2.1}%
-\contentsline {section}{\numberline {19.3}Testing JavaScript}{246}{section.19.3}%
-\contentsline {chapter}{\numberline {20}Develop custom input widgets}{247}{chapter.20}%
-\contentsline {section}{\numberline {20.1}Tabler action button}{247}{section.20.1}%
-\contentsline {subsection}{\numberline {20.1.1}Reminders about the action button}{247}{subsection.20.1.1}%
-\contentsline {subsection}{\numberline {20.1.2}Application to Tabler}{248}{subsection.20.1.2}%
-\contentsline {section}{\numberline {20.2}Toggle Switch}{250}{section.20.2}%
-\contentsline {section}{\numberline {20.3}Navbar menu input}{253}{section.20.3}%
-\contentsline {section}{\numberline {20.4}Exercises}{259}{section.20.4}%
-\contentsline {chapter}{\numberline {21}Adding more interactivity}{261}{chapter.21}%
-\contentsline {section}{\numberline {21.1}Custom progress bars}{261}{section.21.1}%
-\contentsline {section}{\numberline {21.2}User feedback: toasts}{266}{section.21.2}%
-\contentsline {subsection}{\numberline {21.2.1}Toast skeleton}{266}{subsection.21.2.1}%
-\contentsline {subsection}{\numberline {21.2.2}The toast API}{267}{subsection.21.2.2}%
-\contentsline {subsection}{\numberline {21.2.3}R implementation}{267}{subsection.21.2.3}%
-\contentsline {subsection}{\numberline {21.2.4}Wrap up}{269}{subsection.21.2.4}%
-\contentsline {section}{\numberline {21.3}Transform an element in a custom action button}{270}{section.21.3}%
-\contentsline {section}{\numberline {21.4}Tab events}{273}{section.21.4}%
-\contentsline {subsection}{\numberline {21.4.1}Insert/Remove tabs in tabsetpanel}{273}{subsection.21.4.1}%
-\contentsline {section}{\numberline {21.5}Exercises}{280}{section.21.5}%
-\contentsline {chapter}{\numberline {22}Introduction to \{charpente\}}{283}{chapter.22}%
-\contentsline {section}{\numberline {22.1}Motivations}{283}{section.22.1}%
-\contentsline {section}{\numberline {22.2}Step by step}{285}{section.22.2}%
-\contentsline {fm}{Bibliography}{287}{chapter*.87}%
+\contentsline {part}{Practice 1: a dashboard template}{107}{part*.11}%
+\contentsline {chapter}{\numberline {10}Template selection}{109}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Package creation}{111}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Introduction}{111}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Step by step}{113}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Define dependencies}{115}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Discover the project}{115}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Identify mandatory dependencies}{115}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Bundle dependencies}{117}{section.12.3}%
+\contentsline {chapter}{\numberline {13}Template skeleton}{121}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Identify template elements}{121}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Design the page layout}{121}{section.13.2}%
+\contentsline {subsection}{\numberline {13.2.1}The page wrapper}{121}{subsection.13.2.1}%
+\contentsline {subsection}{\numberline {13.2.2}The body content}{126}{subsection.13.2.2}%
+\contentsline {subsection}{\numberline {13.2.3}The footer}{126}{subsection.13.2.3}%
+\contentsline {subsection}{\numberline {13.2.4}The navbar (or header)}{127}{subsection.13.2.4}%
+\contentsline {subsubsection}{\numberline {13.2.4.1}Navbar navigation}{131}{subsubsection.13.2.4.1}%
+\contentsline {subsubsection}{\numberline {13.2.4.2}Fine tune tabs behavior}{134}{subsubsection.13.2.4.2}%
+\contentsline {subsection}{\numberline {13.2.5}Card containers}{135}{subsection.13.2.5}%
+\contentsline {subsubsection}{\numberline {13.2.5.1}Classic card}{135}{subsubsection.13.2.5.1}%
+\contentsline {subsection}{\numberline {13.2.6}Ribbons: card components}{139}{subsection.13.2.6}%
+\contentsline {subsection}{\numberline {13.2.7}Icons}{142}{subsection.13.2.7}%
+\contentsline {section}{\numberline {13.3}Exercises}{142}{section.13.3}%
+\contentsline {chapter}{\numberline {14}Testing and validating templates elements}{143}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Validate template functions}{144}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Create your own validations}{144}{subsection.14.1.1}%
+\contentsline {subsection}{\numberline {14.1.2}Existing utils functions}{147}{subsection.14.1.2}%
+\contentsline {subsubsection}{\numberline {14.1.2.1}Validating tags}{147}{subsubsection.14.1.2.1}%
+\contentsline {subsubsection}{\numberline {14.1.2.2}Validating CSS units}{147}{subsubsection.14.1.2.2}%
+\contentsline {subsection}{\numberline {14.1.3}Example: refine navbar menu items}{148}{subsection.14.1.3}%
+\contentsline {subsubsection}{\numberline {14.1.3.1}Avoid wrong jQuery selectors}{148}{subsubsection.14.1.3.1}%
+\contentsline {subsubsection}{\numberline {14.1.3.2}Checking for multiple selected items}{149}{subsubsection.14.1.3.2}%
+\contentsline {section}{\numberline {14.2}Testing templates elements}{150}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}Testing template behavior}{152}{subsection.14.2.1}%
+\contentsline {section}{\numberline {14.3}Testing JavaScript}{152}{section.14.3}%
+\contentsline {chapter}{\numberline {15}Develop custom input widgets}{155}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Tabler action button}{155}{section.15.1}%
+\contentsline {subsection}{\numberline {15.1.1}Reminders about the action button}{155}{subsection.15.1.1}%
+\contentsline {subsection}{\numberline {15.1.2}Application to Tabler}{156}{subsection.15.1.2}%
+\contentsline {section}{\numberline {15.2}Toggle Switch}{158}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Navbar menu input}{160}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Exercises}{166}{section.15.4}%
+\contentsline {chapter}{\numberline {16}Adding more interactivity}{167}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Custom progress bars}{167}{section.16.1}%
+\contentsline {section}{\numberline {16.2}User feedback: toasts}{170}{section.16.2}%
+\contentsline {subsection}{\numberline {16.2.1}Toast skeleton}{170}{subsection.16.2.1}%
+\contentsline {subsection}{\numberline {16.2.2}The toast API}{170}{subsection.16.2.2}%
+\contentsline {subsection}{\numberline {16.2.3}R implementation}{171}{subsection.16.2.3}%
+\contentsline {subsection}{\numberline {16.2.4}Wrap up}{172}{subsection.16.2.4}%
+\contentsline {section}{\numberline {16.3}Transform an element in a custom action button}{173}{section.16.3}%
+\contentsline {section}{\numberline {16.4}Tab events}{176}{section.16.4}%
+\contentsline {subsection}{\numberline {16.4.1}Insert/Remove tabs in tabsetpanel}{176}{subsection.16.4.1}%
+\contentsline {section}{\numberline {16.5}Exercises}{184}{section.16.5}%
+\contentsline {part}{Beautify with CSS and SASS}{189}{part*.12}%
+\contentsline {chapter}{\numberline {17}Beautify with fresh}{191}{chapter.17}%
+\contentsline {section}{\numberline {17.1}\{fresh\}, the big picture}{191}{section.17.1}%
