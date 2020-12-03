@@ -1,10 +1,5 @@
-bookdown::bs4_book:
-  theme:
-    primary: "#4D6F8D"
-  repo: https://github.com/DivadNojnarg/outstanding-shiny-ui
-  css: css/style.css
 bookdown::gitbook:
-  css: css/style.css
+  css: style.css
   config:
     toc:
       collapse: section
@@ -12,28 +7,17 @@ bookdown::gitbook:
         <li><a href="./">Outstanding User Interfaces with Shiny</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/DivadNojnarg/outstanding-shiny-ui/edit/master/%s
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
     sharing:
       facebook: no
       twitter: no
       github: yes
       all: []
-    download: []
+    download: [pdf, epub, mobi]
 bookdown::pdf_book:
   includes:
-    in_header: latex/preamble.tex
-    before_body: latex/before_body.tex
-    after_body: latex/after_body.tex
-  keep_tex: true
-  dev: "cairo_pdf"
+    in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
-  template: null
-  pandoc_args: --top-level-division=chapter
-  toc_depth: 3
-  toc_unnumbered: false
-  toc_appendix: true
-  quote_footer: ["\\VA{", "}{}"]
-  highlight_bw: true
-bookdown::epub_book:
-  stylesheet: css/style.css
+  keep_tex: yes
+bookdown::epub_book: default
